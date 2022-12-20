@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(spawnEnemy());
+        //StartCoroutine(spawnEnemy());
     }
 
     // Update is called once per frame
@@ -49,22 +49,22 @@ public class GameManager : MonoBehaviour
         bulletSpeedText.text = "Bullet speed: " + Projectile.Speed;
         healthPlayerText.text = "Health: " + PlayerHealth;
     }
-    IEnumerator spawnEnemy()
-    {
-        while (IsGameActive)
-        {
-            int minTimeToSpawn = 0;
-            int maxTimeToSpawn = 1;
+    //IEnumerator spawnEnemy()
+    //{
+    //    while (IsGameActive)
+    //    {
+    //        int minTimeToSpawn = 1;
+    //        int maxTimeToSpawn = 5;
 
-            int randomTimeSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
-            int enemyIndex = Random.Range(0, 3);
+    //        int randomTimeSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
+    //        int enemyIndex = Random.Range(0, 3);
 
-            Instantiate(enemyPrefab[enemyIndex], SpawnRandomEnemyPos(), enemyPrefab[enemyIndex].transform.rotation);
-            EnemyCount++;
+    //        Instantiate(enemyPrefab[enemyIndex], SpawnRandomEnemyPos(), enemyPrefab[enemyIndex].transform.rotation);
+    //        EnemyCount++;
 
-            yield return new WaitForSeconds(randomTimeSpawn);
-        }
-    }
+    //        yield return new WaitForSeconds(randomTimeSpawn);
+    //    }
+    //}
 
     //private Vector3 SpawnRandomEnemyPos()
     //{
@@ -87,11 +87,24 @@ public class GameManager : MonoBehaviour
     //    return randomPos;
     //}
 
-    private Vector2 SpawnRandomEnemyPos()
-    {
-        float radius = 5f;
-        Vector2 randomPos = Random.insideUnitCircle * radius;
+    //private Vector2 SpawnRandomEnemyPos()
+    //{
 
-        return randomPos;
-    }
+    //    float radius = 5f;
+    //    Vector3 randomPos = Random.insideUnitSphere * radius;
+    //    randomPos += transform.position;
+    //    randomPos.y = 0f;
+
+    //    Vector3 direction = randomPos - transform.position;
+    //    direction.Normalize();
+
+    //    float dotProduct = Vector3.Dot(transform.forward, direction);
+    //    float dotProductAngle = Mathf.Acos(dotProduct / transform.forward.magnitude * direction.magnitude);
+
+    //    randomPos.x = Mathf.Cos(dotProductAngle) * radius + transform.position.x;
+    //    randomPos.y = Mathf.Sin(dotProductAngle * (Random.value > 0.5f ? 1f : -1f)) * radius + transform.position.y;
+    //    randomPos.z = transform.position.z;
+
+    //    return randomPos;
+    //}
 }

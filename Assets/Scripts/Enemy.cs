@@ -1,32 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
+    protected int _currentHealth;
+    protected int _maxHealth;
+    protected float _speed;
+    protected int _coins;
+    protected int _damage;
 
-    protected virtual int Health { get; set; } = 100;
-    protected virtual float Speed { get; set; } = 1f;
-    protected virtual int Coins { get; set; } = 1;
-    protected virtual int Damage { get; set; } = 10;
+    public int MaxHealth { get => _maxHealth;  set { _maxHealth = value; } }  
+    public virtual float Speed { get => _speed; set { _speed = value; } }
+    public virtual int Coins { get => _coins; set { _coins = value; } }
+    public virtual int Damage { get => _damage; set { _damage = value; } }
 
-    protected Vector2 playerPosition = new Vector2(0.24f, 2.03f);
+    protected Vector2 playerPosition = new Vector2(0, 0);
 
     public Rigidbody2D enemyRb;
 
-
-    private void Start()
+    protected virtual void Awake()
     {
-        enemyRb = GetComponent<Rigidbody2D>();
         RenameEnemyGameObject();
+    }
+
+    protected virtual void Start()
+    {
+        _currentHealth = _maxHealth;
+        enemyRb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        //Move();
+        Move();
     }
-
-
 
     protected virtual void Move()
     {
@@ -46,36 +54,40 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Cannon"))
         {
             Destroy(gameObject);
-            GameManager.PlayerHealth -= Damage;
+            GameManager.PlayerHealth -= _damage;
 
-        }
-
-        else if (other.gameObject.CompareTag("Projectile"))
-        {
-            Destroy(gameObject);
-            Destroy(other.gameObject);
-            Cannon.isDistanceToNearestTargenInFireRange = false;
-        }
-
-        GameManager.PlayerScore += Coins;
-
+        }     
     }
 
     void RenameEnemyGameObject()
     {
         if (transform.childCount == 0)
-        {
             gameObject.name = GameManager.EnemyCount.ToString();
-            Debug.Log(gameObject.name);
-        }
 
         else
         {
             gameObject.name = GameManager.EnemyCount.ToString();
             gameObject.transform.GetChild(0).name = GameManager.EnemyCount.ToString();
-            Debug.Log(gameObject.name + " " + gameObject.transform.GetChild(0).name);
         }
     }
+
+    public void TakeDamage(int damage)
+    {
+        _currentHealth -= damage;
+
+        if (_currentHealth <= 0) 
+            Destroy();
+
+    }
+
+    private void Destroy()
+    {
+        Destroy(this.gameObject);
+        GameManager.PlayerScore += _coins;
+        Cannon.isDistanceToNearestTargenInFireRange = false;
+        Debug.Log("object destroy!!");
+    }
+
 
 
 

@@ -14,8 +14,9 @@ public class Cannon : MonoBehaviour
     //Vector3 directionTurretToTarget;
     Vector2 directionTurretToTarget_2d;
 
-    public static float RotationSpeed { get; set; } = 0.01f;
+    public static float RotationSpeed { get; set; } = 0.1f;
     public static float FireRange { get; set; } = 2.5f;
+    public static int Damage { get; set; } = 10;
     public static bool isDistanceToNearestTargenInFireRange { get; set; } = false;
 
     bool isTargenOnField = false;
@@ -24,7 +25,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] GameObject projectileSpawnPosition;
 
     float startTime;
-    float shotDelay = 10f;
+    float shotDelay = 0.5f;
     bool isReadyToShot;
     int countEnemy = 0;
 
@@ -40,6 +41,11 @@ public class Cannon : MonoBehaviour
     private void Update()
     {
         FindNearestTarget();
+
+    }
+
+    private void FixedUpdate()
+    {
         TurretRotation();
     }
 
@@ -73,10 +79,6 @@ public class Cannon : MonoBehaviour
 
         if (isTargenOnField && nearestTarget != null && GameManager.IsGameActive)
         {
-            Debug.Log("isTargenOnField" + isTargenOnField);
-            Debug.Log("GameManager.IsGameActive" + GameManager.IsGameActive);
-            Debug.Log("nearestTarget" + nearestTarget);
-
             ////directionTurretToTarget = nearestTarget.position - transform.position; //вектор направления к ближайшей цели
             ////directionTurretToTarget.z = 0;
 
@@ -97,18 +99,20 @@ public class Cannon : MonoBehaviour
             float rotationModifier = 1f;
          
             directionTurretToTarget_2d = nearestTarget.GetComponent<Rigidbody2D>().transform.position - rb.transform.position;
+            
             float angle = Mathf.Atan2(directionTurretToTarget_2d.y, directionTurretToTarget_2d.x) * Mathf.Rad2Deg - rotationModifier;
+            
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
             transform.rotation = Quaternion.Slerp(transform.rotation, q, RotationSpeed);
             
             float angle2 = Quaternion.Angle(rb.transform.localRotation, q);
 
-            Debug.Log("angle " + angle);
-            Debug.Log("angle " + angle2);
+            //Debug.Log("angle " + angle);
+            //Debug.Log("angle " + angle2);
 
             if (angle2 < 1)
             {
-                Debug.Log(angle);
+                //Debug.Log(angle);
                 Shoot();
             }
         }
@@ -123,8 +127,6 @@ public class Cannon : MonoBehaviour
 
     void Shoot()
     {
-        Debug.Log("ready to shoot");
-
         IsReadyToShot();
 
         if (isReadyToShot)
@@ -140,7 +142,6 @@ public class Cannon : MonoBehaviour
     void IsReadyToShot()
     {
         int targetName = TargetNameParse();
-        Debug.Log("targetname " + targetName);
 
         if (targetName != countEnemy && isDistanceToNearestTargenInFireRange)
         {
