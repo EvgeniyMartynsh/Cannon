@@ -1,80 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Asteroid" Collapsed="true">
-    <Position X="7.25" Y="6.75" Width="1.5" />
+    <Position X="0.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAAAAAAAAACAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\Asteroid.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Cannon" Collapsed="true">
-    <Position X="14" Y="1.5" Width="1.5" />
+    <Position X="7.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAwEAECAAigADAAEAABgCABAAAAAAAAiAAAghABEQAA=</HashCode>
       <FileName>Assets\Scripts\Cannon.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Enemy">
-    <Position X="9.25" Y="1.5" Width="1.5" />
+  <Class Name="Enemy" Collapsed="true">
+    <Position X="3" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAACAAKAACAAAAACACBABAABAAAACAAAggAAAgEA=</HashCode>
+      <HashCode>AAQAAADAAKAACAAAAACACBABAABAAAACBAAgiAAAgEA=</HashCode>
       <FileName>Assets\Scripts\Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FireRange" Collapsed="true">
-    <Position X="15.75" Y="1.5" Width="1.5" />
+    <Position X="9.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\FireRange.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameManager" Collapsed="true">
-    <Position X="17.5" Y="1.5" Width="1.5" />
+    <Position X="11.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BBQQggAIICAAAQAAgAAAAAAQAAAAAAAAAAAAAIEAEIA=</HashCode>
+      <HashCode>BAQAggAIICAAAQAAgAAAAAAQAAAAAAAAAAAAAIEAEIA=</HashCode>
       <FileName>Assets\Scripts\GameManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Missile" Collapsed="true">
-    <Position X="9.25" Y="6.75" Width="1.5" />
+    <Position X="5.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAAAAAAAAACAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\Missile.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Projectile" Collapsed="true">
-    <Position X="14" Y="2.5" Width="1.5" />
+    <Position X="7.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAADAAAAAEAAAAAAABAEAAAAAAAAAAACAAAAA=</HashCode>
       <FileName>Assets\Scripts\Projectile.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SpaceShip" Collapsed="true">
-    <Position X="11" Y="6.75" Width="1.5" />
+  <Class Name="SheetReader" Collapsed="true">
+    <Position X="9.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAAAAAAAAACAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAABgAAAEAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SheetReader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpaceShip" Collapsed="true">
+    <Position X="3" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\SpaceShip.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WaveSpawner">
-    <Position X="12.75" Y="6.25" Width="1.5" />
+  <Class Name="WavesParser" Collapsed="true">
+    <Position X="11.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAACAAAAAAAAAAAABAACAAAAgAAgAgAAAAAAA=</HashCode>
-      <FileName>Assets\Scripts\WaveSpawner.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAgAAAAEIAAAAAABAAIAAACA=</HashCode>
+      <FileName>Assets\Scripts\WavesParser.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Waves">
-    <Position X="14.5" Y="6.25" Width="1.5" />
+  <Class Name="WavesSetting" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
-      <FileName>Assets\Scripts\WaveSpawner.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="WaveSettings">
-    <Position X="16.25" Y="6.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAhAAAAABAAAACAAAAAAAAQABgAAAAAEAAAAAAAA=</HashCode>
-      <FileName>Assets\Scripts\WaveSpawner.cs</FileName>
+      <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\WavesSetting.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

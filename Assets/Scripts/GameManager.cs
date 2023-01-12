@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    [SerializeField] List<GameObject> enemyPrefab;
+    
     public static int PlayerHealth { get; set; } = 100;
     public static int PlayerScore { get; set; }
     public static bool IsGameActive { get; set; } = true;
@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
         bulletSpeedText.text = "Bullet speed: " + Projectile.Speed;
         healthPlayerText.text = "Health: " + PlayerHealth;
     }
+
+ 
     //IEnumerator spawnEnemy()
     //{
     //    while (IsGameActive)
@@ -96,7 +98,7 @@ public class GameManager : MonoBehaviour
     //    randomPos.y = 0f;
 
     //    Vector3 direction = randomPos - transform.position;
-    //    direction.Normalize();
+    //    direction.Normalize111();
 
     //    float dotProduct = Vector3.Dot(transform.forward, direction);
     //    float dotProductAngle = Mathf.Acos(dotProduct / transform.forward.magnitude * direction.magnitude);
