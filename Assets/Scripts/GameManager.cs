@@ -9,12 +9,14 @@ public class GameManager : MonoBehaviour
     
     public static int PlayerHealth { get; set; } = 100;
     public static int PlayerScore { get; set; }
+    public static int ExtraCoins { get; set; }
     public static bool IsGameActive { get; set; } = true;
     public static int EnemyCount { get; set; } = 1;
 
 
 
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI extraCoinsText;
     [SerializeField] TextMeshProUGUI fireRangeText;
     [SerializeField] TextMeshProUGUI rotationSpeedText;
     [SerializeField] TextMeshProUGUI bulletSpeedText;
@@ -44,6 +46,7 @@ public class GameManager : MonoBehaviour
     void UpdateUILayer()
     {
         scoreText.text = "$ " + PlayerScore;
+        extraCoinsText.text = "$ extra " + ExtraCoins;
         fireRangeText.text = "Range " + Cannon.FireRange;
         rotationSpeedText.text = "Rotation speed:  " + Cannon.RotationSpeed;
         bulletSpeedText.text = "Bullet speed: " + Projectile.Speed;

@@ -17,6 +17,7 @@ public class Cannon : MonoBehaviour
     public static float RotationSpeed { get; set; } = 0.1f;
     public static float FireRange { get; set; } = 2.5f;
     public static int Damage { get; set; } = 10;
+    public float ShotDelay { get; set; } = 0.5f;
     public static bool isDistanceToNearestTargenInFireRange { get; set; } = false;
 
     bool isTargenOnField = false;
@@ -25,7 +26,6 @@ public class Cannon : MonoBehaviour
     [SerializeField] GameObject projectileSpawnPosition;
 
     float startTime;
-    float shotDelay = 0.5f;
     bool isReadyToShot;
     int countEnemy = 0;
 
@@ -150,7 +150,7 @@ public class Cannon : MonoBehaviour
         }
         else if (targetName == countEnemy && isDistanceToNearestTargenInFireRange)
         {
-            isReadyToShot = (Time.time - startTime) > shotDelay;
+            isReadyToShot = (Time.time - startTime) > ShotDelay;
         }
     }
 

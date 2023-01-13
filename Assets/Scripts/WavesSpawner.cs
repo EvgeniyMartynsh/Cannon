@@ -20,7 +20,6 @@ public class WavesSpawner : MonoBehaviour
 
     void Start()
     {
-        //var _levelsInfo = AssetDatabase.LoadAssetAtPath<LevelsData>("assets/resources/levelsinfo.asset");
         var _levelsInfo = Resources.Load<LevelsData>("levelsinfo");
         _waves = _levelsInfo._wavesList;
         
@@ -29,10 +28,8 @@ public class WavesSpawner : MonoBehaviour
 
     private Vector2 RandomSpawnPos()
     {
-
-        float radius = 5f;
+        float radius = 5.5f;
         Vector3 randomPos = Random.insideUnitSphere * radius;
-        randomPos += transform.position;
         randomPos.y = 0f;
 
         Vector3 direction = randomPos - transform.position;
@@ -41,8 +38,8 @@ public class WavesSpawner : MonoBehaviour
         float dotProduct = Vector3.Dot(transform.forward, direction);
         float dotProductAngle = Mathf.Acos(dotProduct / transform.forward.magnitude * direction.magnitude);
 
-        randomPos.x = Mathf.Cos(dotProductAngle) * radius + transform.position.x;
-        randomPos.y = Mathf.Sin(dotProductAngle * (Random.value > 0.5f ? 1f : -1f)) * radius + transform.position.y;
+        randomPos.x = Mathf.Cos(dotProductAngle) * radius + transform.position.x;     
+        randomPos.y = Mathf.Sin(dotProductAngle * (Random.value > 0.5f ? 1f : -1f)) * radius;
         randomPos.z = transform.position.z;
 
         return randomPos;
@@ -56,26 +53,22 @@ public class WavesSpawner : MonoBehaviour
         {
             for (int j = 0; j < _waves[i].enemyInWaveArray.Length; j++)
             {
-                yield return new WaitForSeconds(
-                _waves[i].enemyInWaveArray[j]._spawnDelay);
+                yield return new WaitForSeconds(_waves[i].enemyInWaveArray[j]._spawnDelay);
 
                 GameObject newEnemy = Instantiate(
-                ParsPrefab(i, j),
-                RandomSpawnPos(),
-                Quaternion.identity);
+                    ParsPrefab(i, j),
+                        RandomSpawnPos(),
+                            Quaternion.identity);
 
-                newEnemy.GetComponent<Enemy>().MaxHealth =
-                    _waves[i].enemyInWaveArray[j]._healthEnemy;
+                newEnemy.GetComponent<Enemy>().MaxHealth = _waves[i].enemyInWaveArray[j]._healthEnemy;
+                newEnemy.GetComponent<Enemy>().Speed = _waves[i].enemyInWaveArray[j]._speed;
+                newEnemy.GetComponent<Enemy>().Coins = _waves[i].enemyInWaveArray[j]._coins;
+                newEnemy.GetComponent<Enemy>().ExtraCoins = _waves[i].enemyInWaveArray[j]._extraCoins;
+                newEnemy.GetComponent<Enemy>().Damage = _waves[i].enemyInWaveArray[j]._damage;
 
-                Debug.Log(i + " " + j);
                 count++;
             }
         }
-        //if (count < 4)
-        //{
-        //    //StartCoroutine(SpawnEnemy());
-        //}
-
 
     }
 
@@ -87,66 +80,6 @@ public class WavesSpawner : MonoBehaviour
         return prefabToInstatiate;
     }
 
-    //private Vector2 RandomSpawnPos()
-    //{
-
-    //    float radius = 5f;
-    //    Vector3 randomPos = Random.insideUnitSphere * radius;
-    //    randomPos += transform.position;
-    //    randomPos.y = 0f;
-
-    //    Vector3 direction = randomPos - transform.position;
-    //    direction.Normalize();
-
-    //    float dotProduct = Vector3.Dot(transform.forward, direction);
-    //    float dotProductAngle = Mathf.Acos(dotProduct / transform.forward.magnitude * direction.magnitude);
-
-    //    randomPos.x = Mathf.Cos(dotProductAngle) * radius + transform.position.x;
-    //    randomPos.y = Mathf.Sin(dotProductAngle * (Random.value > 0.5f ? 1f : -1f)) * radius + transform.position.y;
-    //    randomPos.z = transform.position.z;
-
-    //    return randomPos;
-    //}
-
-    //private IEnumerator SpawnEnemy()
-    //{
-    //    if (_enemiesLeftToSpawn > 0)
-    //    {
-    //        yield return new WaitForSeconds(1); //_waves[0][0]._spawnDelay
-
-    //        GameObject newEnemy = Instantiate(
-    //        ParsPrefab(),
-    //        RandomSpawnPos(),
-    //        Quaternion.identity);
-
-    //        newEnemy.GetComponent<Enemy>().MaxHealth =
-    //            _waves[0][0]._healthEnemy;
-
-    //        _enemiesLeftToSpawn--;
-    //        _currentEnemyIndex++;
-
-    //        StartCoroutine(SpawnEnemy());
-    //    }
-    //    else
-    //    {
-    //        if (_currentWaveIndex < _waves.Count - 1)
-    //        {
-    //            _currentWaveIndex++;
-    //            _enemiesLeftToSpawn = _waves[0].Length;
-    //            _currentEnemyIndex = 0;
-
-    //            StartCoroutine(SpawnEnemy());
-    //        }
-    //    }
-    //}
-
-    //private GameObject ParsPrefab() //, int i
-    //{
-    //    string prefabName = _waves[0][0]._enemyType.ToString();
-    //    GameObject prefabToInstatiate = enemyPrefabs.Where(x => x.name == prefabName).SingleOrDefault();
-
-    //    return prefabToInstatiate;
-    //}
 }
 
 

@@ -6,15 +6,14 @@ using UnityEngine;
 
 
 
-public class WavesParser //: MonoBehaviour 
+public class WavesParser
 {
     IList<IList<object>> google;
 
     int _wavesCount;
 
     [SerializeField]
-    //private List<EnemyInWave[]> _enemyInWaveList = new List<EnemyInWave[]>();
-    //public List<EnemyInWave[]> EnemyInWaveList { get => _enemyInWaveList; }
+
 
     public List<Wave> wavesList = new List<Wave>();
 
@@ -28,10 +27,15 @@ public class WavesParser //: MonoBehaviour
     public class EnemyInWave
     {
         public string _enemyType;
-        public float _spawnDelay;
-        public int _healthEnemy;
-    }
 
+        public float _spawnDelay;
+        public float _speed;
+
+        public int _healthEnemy;
+        public int _coins;
+        public int _extraCoins;
+        public int _damage;
+    }
 
 
     public WavesParser()
@@ -60,9 +64,14 @@ public class WavesParser //: MonoBehaviour
         for (int k = 1; k < google.Count; k++)
         {
             wave.enemyInWaveArray[count] = new EnemyInWave();
+
             wave.enemyInWaveArray[count]._enemyType = (string)google[k][0];
             wave.enemyInWaveArray[count]._spawnDelay = Convert.ToSingle(google[k][1]);
             wave.enemyInWaveArray[count]._healthEnemy = Convert.ToInt32(google[k][2]);
+            wave.enemyInWaveArray[count]._speed = Convert.ToSingle(google[k][3]);
+            wave.enemyInWaveArray[count]._coins = Convert.ToInt32(google[k][4]);
+            wave.enemyInWaveArray[count]._extraCoins = Convert.ToInt32(google[k][5]);
+            wave.enemyInWaveArray[count]._damage = Convert.ToInt32(google[k][6]);
 
             count++;
         }

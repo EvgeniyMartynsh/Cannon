@@ -3,15 +3,17 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    protected int _currentHealth;
-    protected int _maxHealth;
-    protected float _speed;
-    protected int _coins;
-    protected int _damage;
+    [SerializeField] protected int _currentHealth;
+    [SerializeField]  protected int _maxHealth;
+    [SerializeField] protected float _speed;
+    [SerializeField] protected int _coins;
+    [SerializeField] protected int _extraCoins;
+    [SerializeField] protected int _damage;
 
     public int MaxHealth { get => _maxHealth;  set { _maxHealth = value; } }  
     public virtual float Speed { get => _speed; set { _speed = value; } }
     public virtual int Coins { get => _coins; set { _coins = value; } }
+    public virtual int ExtraCoins { get => _extraCoins; set { _extraCoins = value; } }
     public virtual int Damage { get => _damage; set { _damage = value; } }
 
     protected Vector2 playerPosition = new Vector2(0, 0);
@@ -82,6 +84,7 @@ public abstract class Enemy : MonoBehaviour
     {
         Destroy(this.gameObject);
         GameManager.PlayerScore += _coins;
+        GameManager.ExtraCoins += _extraCoins;
         Cannon.isDistanceToNearestTargenInFireRange = false;
         Debug.Log("object destroy!!");
     }
