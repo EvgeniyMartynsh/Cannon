@@ -15,7 +15,6 @@ public class Cannon : MonoBehaviour
     Vector2 directionTurretToTarget_2d;
 
     public static float RotationSpeed { get; set; } = 0.1f;
-    public static float FireRange { get; set; } = 2.5f;
     public static int Damage { get; set; } = 10;
     public float ShotDelay { get; set; } = 0.5f;
     public static bool isDistanceToNearestTargenInFireRange { get; set; } = false;
@@ -24,6 +23,7 @@ public class Cannon : MonoBehaviour
 
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] GameObject projectileSpawnPosition;
+    GameManager gameManager;
 
     float startTime;
     bool isReadyToShot;
@@ -36,6 +36,8 @@ public class Cannon : MonoBehaviour
     {
         startTime = Time.time;
         rb = GetComponent<Rigidbody2D>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
     }
 
     private void Update()
@@ -51,7 +53,7 @@ public class Cannon : MonoBehaviour
 
     private void FindNearestTarget()
     {
-        if (GameManager.IsGameActive)
+        if (!GameManager.IsGameOver)
         {
             float distanceToNearestTarget = float.MaxValue;
             GameObject[] targetArray = GameObject.FindGameObjectsWithTag(enemyTag);
@@ -65,7 +67,7 @@ public class Cannon : MonoBehaviour
                     distanceToNearestTarget = distance;
                     isTargenOnField = true;
 
-                    if (distanceToNearestTarget <= FireRange)
+                    if (distanceToNearestTarget <= GameManager.FireRange)
                     {
                         isDistanceToNearestTargenInFireRange = true;
                     }
@@ -77,25 +79,8 @@ public class Cannon : MonoBehaviour
     private void TurretRotation()
     {
 
-        if (isTargenOnField && nearestTarget != null && GameManager.IsGameActive)
+        if (isTargenOnField && nearestTarget != null && !GameManager.IsGameOver)
         {
-            ////directionTurretToTarget = nearestTarget.position - transform.position; //вектор направления к ближайшей цели
-            ////directionTurretToTarget.z = 0;
-
-            //directionTurretToTarget_2d = nearestTarget.GetComponent<Rigidbody2D>().transform.position - rb.transform.position;
-
-            //Quaternion rotateQuaternion = Quaternion.LookRotation(directionTurretToTarget_2d); // кватернион  на цель
-
-            //float angle = Quaternion.Angle(gameObject.transform.localRotation, rotateQuaternion); // угол на цель, нужен для скорости поворота
-
-            //gameObject.transform.localRotation = 
-            //    Quaternion.Slerp(
-            //        gameObject.transform.localRotation,
-            //        rotateQuaternion,
-            //        Mathf.Min(1f, Time.deltaTime * RotationSpeed / angle)
-            //        );
-            ////сферически интерполированный квартерион между текущим положением и кватернионом направления на цель
-
             float rotationModifier = 1f;
          
             directionTurretToTarget_2d = nearestTarget.GetComponent<Rigidbody2D>().transform.position - rb.transform.position;
@@ -107,12 +92,8 @@ public class Cannon : MonoBehaviour
             
             float angle2 = Quaternion.Angle(rb.transform.localRotation, q);
 
-            //Debug.Log("angle " + angle);
-            //Debug.Log("angle " + angle2);
-
             if (angle2 < 1)
             {
-                //Debug.Log(angle);
                 Shoot();
             }
         }
@@ -121,7 +102,7 @@ public class Cannon : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, FireRange);
+        Gizmos.DrawWireSphere(transform.position, GameManager.FireRange);
     }
 
 

@@ -4,21 +4,21 @@
     <Position X="0.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
-      <FileName>Assets\Scripts\Asteroid.cs</FileName>
+      <FileName>Assets\Scripts\Enemy\Asteroid.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Cannon" Collapsed="true">
     <Position X="7.75" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAwEAECAAigADAAEAABgCABAAAAAAAAiAAAghABEQAA=</HashCode>
+      <HashCode>BAwEAECAAigADAAEAABgCABAAAAAAAAiAAQghABAQAA=</HashCode>
       <FileName>Assets\Scripts\Cannon.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Enemy" Collapsed="true">
     <Position X="3" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAADAAKAACAAAAACACBABAABAAAACBAAgiAAAgEA=</HashCode>
-      <FileName>Assets\Scripts\Enemy.cs</FileName>
+      <HashCode>AAQAAADCAKAACgAAAACACBABAABAAAACBAAgiAAAgEA=</HashCode>
+      <FileName>Assets\Scripts\Enemy\Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FireRange" Collapsed="true">
@@ -31,7 +31,7 @@
   <Class Name="GameManager" Collapsed="true">
     <Position X="11.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAQAggAIICAAAQAAgAAAAAAQAAAAAAAAAAAAAIEAEIA=</HashCode>
+      <HashCode>BAQAggAKIKAAAQAAgAAAAAAQAAAAAAAAAAAAAAEAEIA=</HashCode>
       <FileName>Assets\Scripts\GameManager.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -39,7 +39,7 @@
     <Position X="5.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
-      <FileName>Assets\Scripts\Missile.cs</FileName>
+      <FileName>Assets\Scripts\Enemy\Missile.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Projectile" Collapsed="true">
@@ -60,13 +60,13 @@
     <Position X="3" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
-      <FileName>Assets\Scripts\SpaceShip.cs</FileName>
+      <FileName>Assets\Scripts\Enemy\SpaceShip.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WavesParser" Collapsed="true">
     <Position X="11.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAQAAgAAAAEIAAAAAABAAIAAACA=</HashCode>
+      <HashCode>AAAAAAAAAAAAQAAACAAAAAAAAAAIAAAAAIBAIAAAACA=</HashCode>
       <FileName>Assets\Scripts\WavesParser.cs</FileName>
     </TypeIdentifier>
   </Class>

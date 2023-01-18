@@ -1,16 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
+using static Parser;
 
 public class GameManager : MonoBehaviour
 {
 
-    
-    public static int PlayerHealth { get; set; } = 100;
-    public static int PlayerScore { get; set; }
-    public static int ExtraCoins { get; set; }
-    public static bool IsGameActive { get; set; } = true;
+    //public static GameManager instance = null;
+
+    static int playerHealth;
+    static float fireRange;
+    static int startScore;
+    static int extraCoins;
+
+
+    public static int StartHealth { get => playerHealth; set { playerHealth = value; } }
+    public static int GameHealth { get; set; }
+    public static float FireRange { get => fireRange; set { fireRange = value; } }
+    public static int GameScore { get; set; }
+    public static int StartScore { get => startScore; set { startScore = value; } }
+    public static int ExtraCoins { get => extraCoins; set { extraCoins = value; } }
+    public static bool IsGameOver { get; set; }
     public static int EnemyCount { get; set; } = 1;
 
 
@@ -22,94 +34,77 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI bulletSpeedText;
     [SerializeField] TextMeshProUGUI healthPlayerText;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        //StartCoroutine(spawnEnemy());
+        //    if (instance == null)
+        //        instance = this;
+        //    else if (instance != this)
+        //        Destroy(gameObject);
+
+        //    DontDestroyOnLoad(gameObject);
+
+        //if (!File.Exists(Application.persistentDataPath + "/gameData.dat"))
+        //{
+        //    BinarySaveData binaryData = new BinarySaveData();
+        //    binaryData.SaveFromScriptableobject();
+        //    Debug.Log("SaveFromSO - ok");
+        //}
+        //if (File.Exists(Application.persistentDataPath + "/gameData.dat"))
+        //{
+        //    Debug.Log("File Found");
+
+        //}
+
+
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         UpdateUILayer();
         GameOver();
     }
 
+    public static void Initialisation()
+    {
+        IsGameOver = false;
+
+        //var _playerInfo = Resources.Load<PlayerData>("playerinfo");
+        BinarySaveData binarySave = new BinarySaveData();
+        GameData data = new GameData();
+        data = binarySave.Load();
+
+
+        StartHealth = data.initPlayerHealth;
+        FireRange = data.fireRange;
+        StartScore = data.startScore;
+        ExtraCoins = data.extraCoins;
+        GameScore = StartScore;
+        GameHealth = StartHealth;
+
+        Debug.Log(data.initPlayerHealth);
+        Debug.Log(ExtraCoins);
+    }
+
     void GameOver()
     {
-        if (PlayerHealth <= 0)
+        if (GameHealth <= 0)
         {
-            IsGameActive = false;
+            IsGameOver = true;
         }
     }
 
     void UpdateUILayer()
     {
-        scoreText.text = "$ " + PlayerScore;
+        scoreText.text = "$ " + GameScore;
         extraCoinsText.text = "$ extra " + ExtraCoins;
-        fireRangeText.text = "Range " + Cannon.FireRange;
+        fireRangeText.text = "Range " + FireRange;
         rotationSpeedText.text = "Rotation speed:  " + Cannon.RotationSpeed;
         bulletSpeedText.text = "Bullet speed: " + Projectile.Speed;
-        healthPlayerText.text = "Health: " + PlayerHealth;
+        healthPlayerText.text = "Health: " + GameHealth;
+
     }
 
- 
-    //IEnumerator spawnEnemy()
-    //{
-    //    while (IsGameActive)
-    //    {
-    //        int minTimeToSpawn = 1;
-    //        int maxTimeToSpawn = 5;
 
-    //        int randomTimeSpawn = Random.Range(minTimeToSpawn, maxTimeToSpawn);
-    //        int enemyIndex = Random.Range(0, 3);
 
-    //        Instantiate(enemyPrefab[enemyIndex], SpawnRandomEnemyPos(), enemyPrefab[enemyIndex].transform.rotation);
-    //        EnemyCount++;
-
-    //        yield return new WaitForSeconds(randomTimeSpawn);
-    //    }
-    //}
-
-    //private Vector3 SpawnRandomEnemyPos()
-    //{
-    //    float radius = 10f;
-    //    Vector3 randomPos = Random.insideUnitSphere * radius;
-
-    //    randomPos += transform.position;
-    //    randomPos.y = 0f;
-
-    //    Vector3 direction = randomPos - transform.position;
-    //    direction.Normalize();
-
-    //    float dotProduct = Vector3.Dot(transform.forward, direction);
-
-    //    float dotProductAngle = Mathf.Acos(dotProduct / transform.forward.magnitude * direction.magnitude);
-
-    //    randomPos.x = Mathf.Cos(dotProductAngle) * radius + transform.position.x;
-    //    randomPos.z = Mathf.Sin(dotProductAngle * (Random.value > 0.5f ? 1f : -1f)) * radius + transform.position.z;
-
-    //    return randomPos;
-    //}
-
-    //private Vector2 SpawnRandomEnemyPos()
-    //{
-
-    //    float radius = 5f;
-    //    Vector3 randomPos = Random.insideUnitSphere * radius;
-    //    randomPos += transform.position;
-    //    randomPos.y = 0f;
-
-    //    Vector3 direction = randomPos - transform.position;
-    //    direction.Normalize111();
-
-    //    float dotProduct = Vector3.Dot(transform.forward, direction);
-    //    float dotProductAngle = Mathf.Acos(dotProduct / transform.forward.magnitude * direction.magnitude);
-
-    //    randomPos.x = Mathf.Cos(dotProductAngle) * radius + transform.position.x;
-    //    randomPos.y = Mathf.Sin(dotProductAngle * (Random.value > 0.5f ? 1f : -1f)) * radius + transform.position.y;
-    //    randomPos.z = transform.position.z;
-
-    //    return randomPos;
-    //}
 }

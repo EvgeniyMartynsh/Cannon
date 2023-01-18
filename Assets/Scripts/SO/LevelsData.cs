@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static WavesParser;
+using static Parser;
 
 
 #if UNITY_EDITOR
@@ -21,10 +21,10 @@ public class LevelsData : ScriptableObject
 
 #if UNITY_EDITOR
     [MenuItem("Assets/Create/LevelsInfo", false, 1)]
-    public static void CreateImageData()
+    public static void CreateLevelsInfo()
     {
         LevelsData data = ScriptableObject.CreateInstance<LevelsData>();
-        WavesParser wavesParser = new WavesParser();
+        Parser wavesParser = new Parser();
 
         data._wavesList = wavesParser.wavesList;
         AssetDatabase.CreateAsset(data, "Assets/Resources/LevelsInfo.asset");

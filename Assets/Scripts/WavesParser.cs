@@ -6,7 +6,7 @@ using UnityEngine;
 
 
 
-public class WavesParser
+public class Parser
 {
     IList<IList<object>> google;
 
@@ -16,6 +16,7 @@ public class WavesParser
 
 
     public List<Wave> wavesList = new List<Wave>();
+    public GameData gameData = new GameData();
 
     [System.Serializable]
     public class Wave
@@ -35,15 +36,29 @@ public class WavesParser
         public int _coins;
         public int _extraCoins;
         public int _damage;
+
     }
 
 
-    public WavesParser()
+    public Parser()
     {
 
         SheetReader sheetReader = new SheetReader();
         CountAndFillWaves(sheetReader);
+        FillGamePrefs(sheetReader);
     }
+
+    private void FillGamePrefs(SheetReader sheetReader)
+    {
+        google = sheetReader.getSheetRange("GamePrefs");
+
+        gameData.fireRange = Convert.ToSingle(google[1][1]);
+        gameData.initPlayerHealth = Convert.ToInt32(google[3][1]);
+        gameData.startScore = Convert.ToInt32(google[5][1]);
+        gameData.extraCoins = Convert.ToInt32(google[6][1]);
+
+    }
+
     private void CountAndFillWaves(SheetReader sheetReader)
     {
         _wavesCount = WavesCount(sheetReader);

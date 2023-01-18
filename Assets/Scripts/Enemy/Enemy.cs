@@ -54,7 +54,7 @@ public abstract class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Cannon"))
         {
             Destroy(gameObject);
-            GameManager.PlayerHealth -= _damage;
+            GameManager.GameHealth -= _damage;
 
         }     
     }
@@ -83,7 +83,7 @@ public abstract class Enemy : MonoBehaviour
     private void Destroy()
     {
         Destroy(this.gameObject);
-        GameManager.PlayerScore += _coins;
+        GameManager.GameScore += _coins;
         GameManager.ExtraCoins += _extraCoins;
         Cannon.isDistanceToNearestTargenInFireRange = false;
         Debug.Log("object destroy!!");

@@ -3,26 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using static WavesParser;
+using static Parser;
 
 public class WavesSpawner : MonoBehaviour
 {
     [SerializeField] List<GameObject> enemyPrefabs;
     List<Wave> _waves = new List<Wave>();
 
-    WavesSaveSettings _wavesSaveSettings;
-
-
-    private int _currentEnemyIndex;
-    private int _currentWaveIndex;
-    private int _enemiesLeftToSpawn;
-
 
     void Start()
     {
         var _levelsInfo = Resources.Load<LevelsData>("levelsinfo");
         _waves = _levelsInfo._wavesList;
-        
+
         StartCoroutine(SpawnEnemy());
     }
 
@@ -38,7 +31,7 @@ public class WavesSpawner : MonoBehaviour
         float dotProduct = Vector3.Dot(transform.forward, direction);
         float dotProductAngle = Mathf.Acos(dotProduct / transform.forward.magnitude * direction.magnitude);
 
-        randomPos.x = Mathf.Cos(dotProductAngle) * radius + transform.position.x;     
+        randomPos.x = Mathf.Cos(dotProductAngle) * radius + transform.position.x;
         randomPos.y = Mathf.Sin(dotProductAngle * (Random.value > 0.5f ? 1f : -1f)) * radius;
         randomPos.z = transform.position.z;
 
@@ -47,6 +40,7 @@ public class WavesSpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemy()
     {
+
         int count = 0;
 
         for (int i = 0; i < _waves.Count; i++)
@@ -55,20 +49,25 @@ public class WavesSpawner : MonoBehaviour
             {
                 yield return new WaitForSeconds(_waves[i].enemyInWaveArray[j]._spawnDelay);
 
-                GameObject newEnemy = Instantiate(
-                    ParsPrefab(i, j),
-                        RandomSpawnPos(),
-                            Quaternion.identity);
+                if (!GameManager.IsGameOver)
+                {
+                    GameObject newEnemy = Instantiate(
+                            ParsPrefab(i, j),
+                                RandomSpawnPos(),
+                                    Quaternion.identity);
 
-                newEnemy.GetComponent<Enemy>().MaxHealth = _waves[i].enemyInWaveArray[j]._healthEnemy;
-                newEnemy.GetComponent<Enemy>().Speed = _waves[i].enemyInWaveArray[j]._speed;
-                newEnemy.GetComponent<Enemy>().Coins = _waves[i].enemyInWaveArray[j]._coins;
-                newEnemy.GetComponent<Enemy>().ExtraCoins = _waves[i].enemyInWaveArray[j]._extraCoins;
-                newEnemy.GetComponent<Enemy>().Damage = _waves[i].enemyInWaveArray[j]._damage;
+                    newEnemy.GetComponent<Enemy>().MaxHealth = _waves[i].enemyInWaveArray[j]._healthEnemy;
+                    newEnemy.GetComponent<Enemy>().Speed = _waves[i].enemyInWaveArray[j]._speed;
+                    newEnemy.GetComponent<Enemy>().Coins = _waves[i].enemyInWaveArray[j]._coins;
+                    newEnemy.GetComponent<Enemy>().ExtraCoins = _waves[i].enemyInWaveArray[j]._extraCoins;
+                    newEnemy.GetComponent<Enemy>().Damage = _waves[i].enemyInWaveArray[j]._damage;
 
-                count++;
+                    count++;
+                }
+
             }
         }
+
 
     }
 
