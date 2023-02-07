@@ -15,161 +15,161 @@ MonoBehaviour:
   _wavesList:
   - enemyInWaveArray:
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 1
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 10
       _coins: 1
       _extraCoins: 1
       _damage: 10
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 1
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 1
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 25
       _coins: 1
       _extraCoins: 1
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 25
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Asteroid1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1
       _extraCoins: 0
       _damage: 20
     - _enemyType: Spaceship1
-      _spawnDelay: 1
+      _spawnDelay: 2
       _speed: 1
       _healthEnemy: 20
       _coins: 1

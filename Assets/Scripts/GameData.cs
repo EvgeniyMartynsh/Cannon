@@ -10,6 +10,7 @@ public class GameData
     public float fireRange;
     public int startScore;
     public int extraCoins;
+    public int keyBaseHealth;
 
 
 }

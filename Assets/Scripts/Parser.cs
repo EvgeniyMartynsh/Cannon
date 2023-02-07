@@ -1,9 +1,8 @@
 using Google.Apis.Sheets.v4.Data;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
-
 
 
 public class Parser
@@ -17,6 +16,10 @@ public class Parser
 
     public List<Wave> wavesList = new List<Wave>();
     public GameData gameData = new GameData();
+    
+    public List<DictionaryElement> healthDicList = new List<DictionaryElement>();
+    public List<DictionaryElement> healthCostDicList = new List<DictionaryElement>();
+
 
     [System.Serializable]
     public class Wave
@@ -46,6 +49,36 @@ public class Parser
         SheetReader sheetReader = new SheetReader();
         CountAndFillWaves(sheetReader);
         FillGamePrefs(sheetReader);
+        FillHealthDic(sheetReader);
+        FillHealthCostDic(sheetReader);
+    }
+
+    private void FillHealthCostDic(SheetReader sheetReader)
+    {
+        google = sheetReader.getSheetRange("HealthCost");
+
+        for (int i = 1; i <= 50; i++)
+        {
+            DictionaryElement dE = new DictionaryElement();
+            dE.key = Convert.ToInt32(google[i][0]);
+            dE.value = Convert.ToInt32(google[i][1]);
+            healthCostDicList.Add(dE);
+        }
+    }
+
+    private void FillHealthDic(SheetReader sheetReader)
+    {
+        google = sheetReader.getSheetRange("Health");
+
+        for (int i = 1; i <= 50; i++)
+        {
+            DictionaryElement dE = new DictionaryElement();
+            dE.key = Convert.ToInt32(google[i][0]);
+            dE.value = Convert.ToInt32(google[i][1]);
+            healthDicList.Add(dE);
+
+        }
+
     }
 
     private void FillGamePrefs(SheetReader sheetReader)
@@ -56,6 +89,7 @@ public class Parser
         gameData.initPlayerHealth = Convert.ToInt32(google[3][1]);
         gameData.startScore = Convert.ToInt32(google[5][1]);
         gameData.extraCoins = Convert.ToInt32(google[6][1]);
+        gameData.keyBaseHealth = Convert.ToInt32(google[7][1]);
 
     }
 

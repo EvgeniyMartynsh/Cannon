@@ -28,6 +28,8 @@ public class Cannon : MonoBehaviour
     float startTime;
     bool isReadyToShot;
     int countEnemy = 0;
+    float shotTimer = 0;
+
 
     Rigidbody2D rb;
 
@@ -43,6 +45,7 @@ public class Cannon : MonoBehaviour
     private void Update()
     {
         FindNearestTarget();
+        shotTimer += Time.deltaTime;
 
     }
 
@@ -100,57 +103,16 @@ public class Cannon : MonoBehaviour
     }
 
 
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, GameManager.FireRange);
-    }
-
-
     void Shoot()
     {
-        IsReadyToShot();
-
-        if (isReadyToShot)
+        if (shotTimer >= ShotDelay && isDistanceToNearestTargenInFireRange)
         {
             Instantiate(projectilePrefab, projectileSpawnPosition.transform.position, projectileSpawnPosition.transform.rotation);
-            startTime = Time.time;
-
-            return;
+            shotTimer = 0;
         }
 
         else { return; }
     }
-    void IsReadyToShot()
-    {
-        int targetName = TargetNameParse();
-
-        if (targetName != countEnemy && isDistanceToNearestTargenInFireRange)
-        {
-            isReadyToShot = true;
-            countEnemy = targetName;
-        }
-        else if (targetName == countEnemy && isDistanceToNearestTargenInFireRange)
-        {
-            isReadyToShot = (Time.time - startTime) > ShotDelay;
-        }
-    }
-
-    int TargetNameParse()
-    {
-        int number;
-        bool success = int.TryParse(nearestTarget.name, out number);
-
-        if (success)
-        {
-            return number;
-        }
-        else
-        {
-            Debug.Log("convert string to int failed: " + " " + nearestTarget.name);
-            return 0;
-        }
-    }
-
 
 }
 

@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9646ead648b8949b493fd1b7cf8d8b, type: 3}
+  m_Name: HealthCostDicInfo
+  m_EditorClassIdentifier: 
+  dictionaryElements:
+  - key: 1
+    value: 10
+  - key: 2
+    value: 12
+  - key: 3
+    value: 15
+  - key: 4
+    value: 19
+  - key: 5
+    value: 23
+  - key: 6
+    value: 28
+  - key: 7
+    value: 33
+  - key: 8
+    value: 39
+  - key: 9
+    value: 47
+  - key: 10
+    value: 54
+  - key: 11
+    value: 63
+  - key: 12
+    value: 72
+  - key: 13
+    value: 83
+  - key: 14
+    value: 93
+  - key: 15
+    value: 105
+  - key: 16
+    value: 118
+  - key: 17
+    value: 131
+  - key: 18
+    value: 145
+  - key: 19
+    value: 159
+  - key: 20
+    value: 175
+  - key: 21
+    value: 191
+  - key: 22
+    value: 208
+  - key: 23
+    value: 225
+  - key: 24
+    value: 244
+  - key: 25
+    value: 263
+  - key: 26
+    value: 283
+  - key: 27
+    value: 303
+  - key: 28
+    value: 325
+  - key: 29
+    value: 347
+  - key: 30
+    value: 370
+  - key: 31
+    value: 393
+  - key: 32
+    value: 418
+  - key: 33
+    value: 443
+  - key: 34
+    value: 469
+  - key: 35
+    value: 496
+  - key: 36
+    value: 523
+  - key: 37
+    value: 551
+  - key: 38
+    value: 580
+  - key: 39
+    value: 610
+  - key: 40
+    value: 640
+  - key: 41
+    value: 671
+  - key: 42
+    value: 703
+  - key: 43
+    value: 736
+  - key: 44
+    value: 769
+  - key: 45
+    value: 803
+  - key: 46
+    value: 838
+  - key: 47
+    value: 874
+  - key: 48
+    value: 910
+  - key: 49
+    value: 947
+  - key: 50
+    value: 985

@@ -1,28 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ToStartMenu : MonoBehaviour
 {
-    public void GoToStartMenu()
+    public void GoToStartMenuButton()
     {
 
-        SaveExtraCoins();        
+        UpdateExtraCoins("extraCoins", GameManager.ExtraCoins);
         SceneManager.LoadScene(0);
-
     }
 
-     void SaveExtraCoins()
+
+    public void UpdateExtraCoins(string fieldName, object newValue)
     {
-        BinarySaveData binarySave = new BinarySaveData();
+        BinarySaveData binarySaveData = new BinarySaveData();
         GameData gameData = new GameData();
-        gameData.extraCoins = GameManager.ExtraCoins;
-        gameData.initPlayerHealth = GameManager.StartHealth;
-        gameData.fireRange = GameManager.FireRange;
-        gameData.startScore = GameManager.StartScore;
+        gameData = binarySaveData.Load();
 
-        binarySave.Save(gameData);
-        
+        Type type = gameData.GetType();
+        FieldInfo fieldInfo = type.GetField(fieldName);
+        fieldInfo.SetValue(gameData, newValue);
+
+        binarySaveData.Save(gameData);
     }
+
 }

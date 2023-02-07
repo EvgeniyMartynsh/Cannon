@@ -17,3 +17,4 @@ MonoBehaviour:
     fireRange: 3
     startScore: 10
     extraCoins: 5
+    keyBaseHealth: 1

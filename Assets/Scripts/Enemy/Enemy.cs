@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected int _currentHealth;
-    [SerializeField]  protected int _maxHealth;
+    [SerializeField] protected int _maxHealth;
     [SerializeField] protected float _speed;
     [SerializeField] protected int _coins;
     [SerializeField] protected int _extraCoins;
@@ -19,16 +19,20 @@ public abstract class Enemy : MonoBehaviour
     protected Vector2 playerPosition = new Vector2(0, 0);
 
     public Rigidbody2D enemyRb;
+    UpdateUILayer _ui;
+
 
     protected virtual void Awake()
     {
         RenameEnemyGameObject();
+
     }
 
     protected virtual void Start()
     {
         _currentHealth = _maxHealth;
         enemyRb = GetComponent<Rigidbody2D>();
+        _ui = FindObjectOfType<UpdateUILayer>();
     }
 
     private void Update()
@@ -83,10 +87,17 @@ public abstract class Enemy : MonoBehaviour
     private void Destroy()
     {
         Destroy(this.gameObject);
+        
+
+
         GameManager.GameScore += _coins;
         GameManager.ExtraCoins += _extraCoins;
+
+        _ui.UpdateUI();
+
         Cannon.isDistanceToNearestTargenInFireRange = false;
         Debug.Log("object destroy!!");
+
     }
 
 

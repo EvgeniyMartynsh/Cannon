@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -8,82 +9,106 @@ using static Parser;
 public class GameManager : MonoBehaviour
 {
 
-    //public static GameManager instance = null;
-
-    static int playerHealth;
-    static float fireRange;
-    static int startScore;
-    static int extraCoins;
+    private static float _fireRange;
+    private static int _startScore;
+    private static int _extraCoins;
 
 
-    public static int StartHealth { get => playerHealth; set { playerHealth = value; } }
+    public static int KeyBaseHealth { get; set; }
+    public static int KeyGameHealth { get; set; }
+    public static int KeyHealthCost { get; set; }
     public static int GameHealth { get; set; }
-    public static float FireRange { get => fireRange; set { fireRange = value; } }
+    public static int HealthCost { get; set; }
+
+
+
+
+    public static float FireRange { get => _fireRange; set { _fireRange = value; } }
     public static int GameScore { get; set; }
-    public static int StartScore { get => startScore; set { startScore = value; } }
-    public static int ExtraCoins { get => extraCoins; set { extraCoins = value; } }
+    public static int StartScore { get => _startScore; set { _startScore = value; } }
+    public static int ExtraCoins { get => _extraCoins; set { _extraCoins = value; } }
     public static bool IsGameOver { get; set; }
     public static int EnemyCount { get; set; } = 1;
 
 
-
-    [SerializeField] TextMeshProUGUI scoreText;
-    [SerializeField] TextMeshProUGUI extraCoinsText;
-    [SerializeField] TextMeshProUGUI fireRangeText;
-    [SerializeField] TextMeshProUGUI rotationSpeedText;
-    [SerializeField] TextMeshProUGUI bulletSpeedText;
-    [SerializeField] TextMeshProUGUI healthPlayerText;
-
     private void Awake()
     {
-        //    if (instance == null)
-        //        instance = this;
-        //    else if (instance != this)
-        //        Destroy(gameObject);
-
-        //    DontDestroyOnLoad(gameObject);
-
-        //if (!File.Exists(Application.persistentDataPath + "/gameData.dat"))
-        //{
-        //    BinarySaveData binaryData = new BinarySaveData();
-        //    binaryData.SaveFromScriptableobject();
-        //    Debug.Log("SaveFromSO - ok");
-        //}
-        //if (File.Exists(Application.persistentDataPath + "/gameData.dat"))
-        //{
-        //    Debug.Log("File Found");
-
-        //}
-
-
+        CheckGameDataBinaryFile();
+        Initialisation();
+        
     }
-
 
     void Update()
     {
-        UpdateUILayer();
         GameOver();
     }
 
+    private void CheckGameDataBinaryFile()
+    {
+        if (!File.Exists(Application.persistentDataPath + "/gameData.dat"))
+        {
+            BinarySaveData binaryData = new BinarySaveData();
+            binaryData.SaveFromScriptableobject();
+            Debug.Log("SaveFromSO - ok");
+        }
+        if (File.Exists(Application.persistentDataPath + "/gameData.dat"))
+        {
+            Debug.Log("File Found");
+
+        }
+    }
     public static void Initialisation()
     {
         IsGameOver = false;
 
-        //var _playerInfo = Resources.Load<PlayerData>("playerinfo");
         BinarySaveData binarySave = new BinarySaveData();
         GameData data = new GameData();
         data = binarySave.Load();
 
 
-        StartHealth = data.initPlayerHealth;
+        KeyBaseHealth = data.keyBaseHealth;
+        KeyGameHealth = KeyBaseHealth;
+
+        KeyHealthCost = 1;
+
+        GameHealth = SetHealth(KeyGameHealth);
+        HealthCost = SetHealthCost(KeyHealthCost);
+
+
         FireRange = data.fireRange;
         StartScore = data.startScore;
         ExtraCoins = data.extraCoins;
         GameScore = StartScore;
-        GameHealth = StartHealth;
 
-        Debug.Log(data.initPlayerHealth);
-        Debug.Log(ExtraCoins);
+        UpdateUILayer _ui;
+        _ui = FindObjectOfType<UpdateUILayer>();
+        _ui.UpdateUI();
+    }
+
+    public static int SetHealth(int a)
+    {
+        var _health = Resources.Load<HealthData>("HealthDicInfo");
+        int value = 0;
+
+        for (int i = 0; i < _health.dictionaryElements.Count; i++)
+        {
+            if (_health.dictionaryElements[i].key == a)
+                value = _health.dictionaryElements[i].value;     
+        }
+        return value;
+    }
+
+    public static int SetHealthCost(int a)
+    {
+        var _health = Resources.Load<HealthCostData>("HealthCostDicInfo");
+        int value = 0;
+
+        for (int i = 0; i < _health.dictionaryElements.Count; i++)
+        {
+            if (_health.dictionaryElements[i].key == a)
+                value = _health.dictionaryElements[i].value;
+        }
+        return value;
     }
 
     void GameOver()
@@ -93,18 +118,5 @@ public class GameManager : MonoBehaviour
             IsGameOver = true;
         }
     }
-
-    void UpdateUILayer()
-    {
-        scoreText.text = "$ " + GameScore;
-        extraCoinsText.text = "$ extra " + ExtraCoins;
-        fireRangeText.text = "Range " + FireRange;
-        rotationSpeedText.text = "Rotation speed:  " + Cannon.RotationSpeed;
-        bulletSpeedText.text = "Bullet speed: " + Projectile.Speed;
-        healthPlayerText.text = "Health: " + GameHealth;
-
-    }
-
-
 
 }

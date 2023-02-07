@@ -9,12 +9,7 @@ using UnityEngine;
 public class BinarySaveData
 {
 
-    
-
     [SerializeField]  public GameData gameData;
-
-
-
 
     public void Save(GameData gameData)
     {
