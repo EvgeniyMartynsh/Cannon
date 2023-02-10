@@ -9,12 +9,17 @@ public class WavesSpawner : MonoBehaviour
 {
     [SerializeField] List<GameObject> enemyPrefabs;
     List<Wave> _waves = new List<Wave>();
+    GameManager gameManager;
+
 
 
     void Start()
     {
+        Debug.Log("WaveSpawner start");
+
         var _levelsInfo = Resources.Load<LevelsData>("levelsinfo");
         _waves = _levelsInfo._wavesList;
+        gameManager = GameManager.instance;
 
         StartCoroutine(SpawnEnemy());
     }
@@ -49,7 +54,7 @@ public class WavesSpawner : MonoBehaviour
             {
                 yield return new WaitForSeconds(_waves[i].enemyInWaveArray[j]._spawnDelay);
 
-                if (!GameManager.IsGameOver)
+                if (!gameManager.IsGameOver)
                 {
                     GameObject newEnemy = Instantiate(
                             ParsPrefab(i, j),

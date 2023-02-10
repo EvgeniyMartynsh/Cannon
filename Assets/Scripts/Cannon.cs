@@ -11,7 +11,6 @@ public class Cannon : MonoBehaviour
     string enemyTag = "Enemy";
 
     Transform nearestTarget = null;
-    //Vector3 directionTurretToTarget;
     Vector2 directionTurretToTarget_2d;
 
     public static float RotationSpeed { get; set; } = 0.1f;
@@ -38,7 +37,7 @@ public class Cannon : MonoBehaviour
     {
         startTime = Time.time;
         rb = GetComponent<Rigidbody2D>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameManager.instance;
 
     }
 
@@ -56,7 +55,7 @@ public class Cannon : MonoBehaviour
 
     private void FindNearestTarget()
     {
-        if (!GameManager.IsGameOver)
+        if (!gameManager.IsGameOver)
         {
             float distanceToNearestTarget = float.MaxValue;
             GameObject[] targetArray = GameObject.FindGameObjectsWithTag(enemyTag);
@@ -70,7 +69,7 @@ public class Cannon : MonoBehaviour
                     distanceToNearestTarget = distance;
                     isTargenOnField = true;
 
-                    if (distanceToNearestTarget <= GameManager.FireRange)
+                    if (distanceToNearestTarget <= gameManager.FireRange)
                     {
                         isDistanceToNearestTargenInFireRange = true;
                     }
@@ -82,7 +81,7 @@ public class Cannon : MonoBehaviour
     private void TurretRotation()
     {
 
-        if (isTargenOnField && nearestTarget != null && !GameManager.IsGameOver)
+        if (isTargenOnField && nearestTarget != null && !gameManager.IsGameOver)
         {
             float rotationModifier = 1f;
          

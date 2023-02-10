@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameData:
     initPlayerHealth: 150
-    fireRange: 3
+    fireRange: 2
     startScore: 10
     extraCoins: 5
     keyBaseHealth: 1

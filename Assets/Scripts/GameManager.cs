@@ -8,44 +8,59 @@ using static Parser;
 
 public class GameManager : MonoBehaviour
 {
-    public static event Action<float> OnPlayerHealthValueChangedEvent;
-
-    private static float _fireRange;
-    private static int _startScore;
-    private static int _extraCoins;
-    private static int _restorHealthPoints = 1;
-
-    public static float healthNormolized => (float)CurrentGameHealth / UpgradeHealth;
+    public static GameManager instance;
 
 
-    public static int KeyGameHealth { get; set; }
-    public static int KeyHealthCost { get; set; }
-    public static int CurrentGameHealth { get; set; }
-    public static int UpgradeHealth { get; set; }
-    public static int UpgradeHealthCost { get; set; }
+    public event Action<float> OnPlayerHealthValueChangedEvent;
+
+    private float _fireRange;
+    private int _startScore;
+    private int _extraCoins;
+    private int _restorHealthPoints = 1;
+
+    public float healthNormolized => (float)CurrentGameHealth / UpgradeHealth;
+
+
+    public int KeyGameHealth { get; set; }
+    public int KeyHealthCost { get; set; }
+    public int CurrentGameHealth { get; set; }
+    public int UpgradeHealth { get; set; }
+    public int UpgradeHealthCost { get; set; }
 
 
 
 
-    public static float FireRange { get => _fireRange; set { _fireRange = value; } }
-    public static int GameScore { get; set; }
-    public static int StartScore { get => _startScore; set { _startScore = value; } }
-    public static int ExtraCoins { get => _extraCoins; set { _extraCoins = value; } }
-    public static bool IsGameOver { get; set; }
-    public static int EnemyCount { get; set; } = 1;
+    public float FireRange { get => _fireRange; set { _fireRange = value; } }
+    public int GameScore { get; set; }
+    public int StartScore { get => _startScore; set { _startScore = value; } }
+    public int ExtraCoins { get => _extraCoins; set { _extraCoins = value; } }
+    public bool IsGameOver { get; set; }
+    public bool IsGameActive { get; set; }
+    public int EnemyCount { get; set; } = 1;
 
 
     private void Awake()
     {
+
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+
         CheckGameDataBinaryFile();
         Initialisation();
         OnPlayerHealthValueChangedEvent?.Invoke(healthNormolized);
-        StartCoroutine(RestoreCurrentGameHealth());
+        //StartCoroutine(RestoreCurrentGameHealth());
     }
 
     void Update()
     {
-
         GameOver();
     }
 
@@ -63,9 +78,10 @@ public class GameManager : MonoBehaviour
 
         }
     }
-    public static void Initialisation()
+    public void Initialisation()
     {
         IsGameOver = false;
+        IsGameActive = true;
 
         BinarySaveData binarySave = new BinarySaveData();
         GameData data = new GameData();
@@ -92,7 +108,7 @@ public class GameManager : MonoBehaviour
         _ui.UpdateUI();
     }
 
-    public static int SetHealth(int a)
+    public int SetHealth(int a)
     {
         var _health = Resources.Load<HealthData>("HealthDicInfo");
         int value = 0;
@@ -105,7 +121,7 @@ public class GameManager : MonoBehaviour
         return value;
     }
 
-    public static int SetHealthCost(int a)
+    public int SetHealthCost(int a)
     {
         var _health = Resources.Load<HealthCostData>("HealthCostDicInfo");
         int value = 0;
@@ -118,7 +134,7 @@ public class GameManager : MonoBehaviour
         return value;
     }
 
-    public static void ChangeHealth(int damage)
+    public void ChangeHealth(int damage)
     {
         CurrentGameHealth -= damage;
         OnPlayerHealthValueChangedEvent?.Invoke(healthNormolized);
@@ -136,8 +152,9 @@ public class GameManager : MonoBehaviour
 
         ProgressBarLife _life;
         _life = FindObjectOfType<ProgressBarLife>();
+        //TODO: тут наверно надо на ивенты переписать
 
-        if (CurrentGameHealth < UpgradeHealth)
+        if (CurrentGameHealth < UpgradeHealth && !IsGameOver)
         {
             CurrentGameHealth += _restorHealthPoints;
             _ui.UpdateUI();

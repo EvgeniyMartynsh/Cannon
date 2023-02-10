@@ -7,29 +7,34 @@ public class Health : MonoBehaviour
 {
     UpdateUILayer _ui;
     ProgressBarLife _life;
+    GameManager gameManager;
 
     private void Start()
     {
         _ui = FindObjectOfType<UpdateUILayer>();
         _life = FindObjectOfType<ProgressBarLife>();
+        gameManager = GameManager.instance;
     }
 
     public void UpgradeHealthButton()
     {
-        GameManager.KeyGameHealth += 1;
-        GameManager.KeyHealthCost += 1;
+        if (!gameManager.IsGameOver)
+        {
+            gameManager.KeyGameHealth += 1;
+            gameManager.KeyHealthCost += 1;
 
-        GameManager.UpgradeHealth = GameManager.SetHealth(GameManager.KeyGameHealth);
+            gameManager.UpgradeHealth = gameManager.SetHealth(gameManager.KeyGameHealth);
 
-        AddNewPointsToGameHealth(GameManager.KeyGameHealth);
+            AddNewPointsToGameHealth(gameManager.KeyGameHealth);
 
 
-        _life.SetValue(GameManager.healthNormolized);
+            _life.SetValue(gameManager.healthNormolized);
 
-        
-        GameManager.UpgradeHealthCost = GameManager.SetHealthCost(GameManager.KeyHealthCost);
 
-        _ui.UpdateUI();
+            gameManager.UpgradeHealthCost = gameManager.SetHealthCost(gameManager.KeyHealthCost);
+
+            _ui.UpdateUI();
+        }
     }
 
     private void AddNewPointsToGameHealth(int keyGameHealth)
@@ -44,6 +49,6 @@ public class Health : MonoBehaviour
                 value = _health.dictionaryElements[i].value;
         }
 
-        GameManager.CurrentGameHealth += GameManager.UpgradeHealth - value;
+        gameManager.CurrentGameHealth += gameManager.UpgradeHealth - value;
     }
 }

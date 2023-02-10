@@ -6,12 +6,15 @@ using UnityEngine;
 public class UIWidgetLifeBar : MonoBehaviour
 {
     [SerializeField] private ProgressBarLife _progressBar;
+    GameManager gameManager;
 
-    private void OnEnable()
+
+    private void Start()
     {
-        _progressBar.SetValue(GameManager.healthNormolized);
+        gameManager = GameManager.instance;
+        _progressBar.SetValue(GameManager.instance.healthNormolized);
 
-        GameManager.OnPlayerHealthValueChangedEvent += OnPlayerHealthValueChanged;
+        gameManager.OnPlayerHealthValueChangedEvent += OnPlayerHealthValueChanged;
     }
 
     public void OnPlayerHealthValueChanged(float newValueNormalized)
@@ -21,7 +24,15 @@ public class UIWidgetLifeBar : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.OnPlayerHealthValueChangedEvent -= OnPlayerHealthValueChanged;
+        if (gameManager != null)
+        {
+            gameManager.OnPlayerHealthValueChangedEvent -= OnPlayerHealthValueChanged;
+        }
+        else
+        {
+            Debug.Log("gameManager is null");
+        }
+        
 
     }
 }

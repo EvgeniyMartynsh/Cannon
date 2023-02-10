@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SpaceShip : Enemy
 {
-    protected override void Awake()
-    {
-        Speed = 1f;
-        Coins = 1;
-        Damage = 10;
+    //protected override void Awake()
+    //{
+    //    Speed = 1f;
+    //    Coins = 1;
+    //    Damage = 10;
 
-        base.Awake();
-    }
+    //    base.Awake();
+    //}
 }

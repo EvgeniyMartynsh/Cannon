@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Asteroid : Enemy
 {
-    protected override void Awake()
-    {
-        Speed = 0.5f;
-        Coins = 3;
-        Damage = 25;
+    //protected override void Awake()
+    //{
+    //    Speed = 0.5f;
+    //    Coins = 3;
+    //    Damage = 25;
         
-        base.Awake();
-    }
+    //    base.Awake();
+    //}
 }
 

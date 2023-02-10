@@ -1,19 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ToStartMenu : MonoBehaviour
 {
+    
     public void GoToStartMenuButton()
     {
-
-        UpdateExtraCoins("extraCoins", GameManager.ExtraCoins);
-        SceneManager.LoadScene(0);
+        UpdateExtraCoins("extraCoins", GameManager.instance.ExtraCoins);
+        GameManager.instance.IsGameActive = false;
     }
 
 

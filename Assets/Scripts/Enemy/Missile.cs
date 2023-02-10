@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Missile : Enemy
 {
-    protected override void Awake()
-    {
-        Speed = 1.5f;
-        Coins = 2;
-        Damage = 15;
+    //protected override void Awake()
+    //{
+    //    Speed = 1.5f;
+    //    Coins = 2;
+    //    Damage = 15;
 
-        base.Awake();
-    }
+    //    base.Awake();
+    //}
 }
