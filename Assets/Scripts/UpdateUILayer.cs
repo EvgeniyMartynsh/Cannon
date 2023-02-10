@@ -22,9 +22,9 @@ public class UpdateUILayer : MonoBehaviour
         fireRangeText.text = "Range " + GameManager.FireRange;
         rotationSpeedText.text = "Rotation speed:  " + Cannon.RotationSpeed;
         bulletSpeedText.text = "Bullet speed: " + Projectile.Speed;
-        healthPlayerText.text = Convert.ToString(GameManager.GameHealth);
-        healthCostText.text = "$ " + Convert.ToString(GameManager.HealthCost);
-        currentHealth.text = "H: " + GameManager.GameHealth;
+        healthPlayerText.text = Convert.ToString(GameManager.UpgradeHealth);
+        healthCostText.text = "$ " + Convert.ToString(GameManager.UpgradeHealthCost);
+        currentHealth.text = "H: " + GameManager.CurrentGameHealth;
     }
 
 }

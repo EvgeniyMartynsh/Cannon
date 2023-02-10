@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 
 
 public abstract class Enemy : MonoBehaviour
 {
+    
+
+
     [SerializeField] protected int _currentHealth;
     [SerializeField] protected int _maxHealth;
     [SerializeField] protected float _speed;
@@ -58,8 +62,13 @@ public abstract class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Cannon"))
         {
             Destroy(gameObject);
-            GameManager.GameHealth -= _damage;
 
+            if (GameManager.CurrentGameHealth > 0)
+            {
+                GameManager.ChangeHealth(_damage);
+                
+            }
+            _ui.UpdateUI();
         }     
     }
 

@@ -8,17 +8,21 @@ using static Parser;
 
 public class GameManager : MonoBehaviour
 {
+    public static event Action<float> OnPlayerHealthValueChangedEvent;
 
     private static float _fireRange;
     private static int _startScore;
     private static int _extraCoins;
+    private static int _restorHealthPoints = 1;
+
+    public static float healthNormolized => (float)CurrentGameHealth / UpgradeHealth;
 
 
-    public static int KeyBaseHealth { get; set; }
     public static int KeyGameHealth { get; set; }
     public static int KeyHealthCost { get; set; }
-    public static int GameHealth { get; set; }
-    public static int HealthCost { get; set; }
+    public static int CurrentGameHealth { get; set; }
+    public static int UpgradeHealth { get; set; }
+    public static int UpgradeHealthCost { get; set; }
 
 
 
@@ -35,11 +39,13 @@ public class GameManager : MonoBehaviour
     {
         CheckGameDataBinaryFile();
         Initialisation();
-        
+        OnPlayerHealthValueChangedEvent?.Invoke(healthNormolized);
+        StartCoroutine(RestoreCurrentGameHealth());
     }
 
     void Update()
     {
+
         GameOver();
     }
 
@@ -66,14 +72,15 @@ public class GameManager : MonoBehaviour
         data = binarySave.Load();
 
 
-        KeyBaseHealth = data.keyBaseHealth;
-        KeyGameHealth = KeyBaseHealth;
+
+        KeyGameHealth = data.keyBaseHealth;
 
         KeyHealthCost = 1;
 
-        GameHealth = SetHealth(KeyGameHealth);
-        HealthCost = SetHealthCost(KeyHealthCost);
+        CurrentGameHealth = SetHealth(KeyGameHealth); ;
+        UpgradeHealth = CurrentGameHealth;
 
+        UpgradeHealthCost = SetHealthCost(KeyHealthCost);
 
         FireRange = data.fireRange;
         StartScore = data.startScore;
@@ -93,7 +100,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < _health.dictionaryElements.Count; i++)
         {
             if (_health.dictionaryElements[i].key == a)
-                value = _health.dictionaryElements[i].value;     
+                value = _health.dictionaryElements[i].value;
         }
         return value;
     }
@@ -111,9 +118,43 @@ public class GameManager : MonoBehaviour
         return value;
     }
 
+    public static void ChangeHealth(int damage)
+    {
+        CurrentGameHealth -= damage;
+        OnPlayerHealthValueChangedEvent?.Invoke(healthNormolized);
+    }
+
+    IEnumerator RestoreCurrentGameHealth()
+    {
+        Debug.Log("Ienumerator");
+
+        yield return new WaitForSeconds(1);
+
+
+        UpdateUILayer _ui;
+        _ui = FindObjectOfType<UpdateUILayer>();
+
+        ProgressBarLife _life;
+        _life = FindObjectOfType<ProgressBarLife>();
+
+        if (CurrentGameHealth < UpgradeHealth)
+        {
+            CurrentGameHealth += _restorHealthPoints;
+            _ui.UpdateUI();
+            _life.SetValue(healthNormolized);
+        }
+
+        StartCoroutine(RestoreCurrentGameHealth());
+
+        //while (!IsGameOver)
+        //{
+        //    RestoreCurrentGameHealth();
+        //}
+    }
+
     void GameOver()
     {
-        if (GameHealth <= 0)
+        if (CurrentGameHealth <= 0)
         {
             IsGameOver = true;
         }
