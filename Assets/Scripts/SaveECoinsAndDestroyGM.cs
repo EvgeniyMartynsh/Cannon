@@ -3,13 +3,14 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ToStartMenu : MonoBehaviour
+public class SaveECoinsAndDestroyGM : MonoBehaviour
 {
     
-    public void GoToStartMenuButton()
+    public void SaveExtraCoinsAndDestroyGM()
     {
         UpdateExtraCoins("extraCoins", GameManager.instance.ExtraCoins);
-        GameManager.instance.IsGameActive = false;
+        Destroy(GameManager.instance);
+
     }
 
 
@@ -24,6 +25,7 @@ public class ToStartMenu : MonoBehaviour
         fieldInfo.SetValue(gameData, newValue);
 
         binarySaveData.Save(gameData);
+
     }
 
 }

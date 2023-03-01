@@ -30,16 +30,16 @@ public class Projectile : MonoBehaviour {
 	}
 
 
-	private void OnTriggerEnter2D(Collider2D col)
+	private void OnTriggerEnter2D(Collider2D collider)
 	{
-		if (col.gameObject.tag != "Projectile")
+		if (collider.gameObject.tag != "Projectile")
 		{
 			Instantiate(hit_effect, transform.position, Quaternion.identity);
 			Destroy(gameObject);
 
-			if (col.gameObject.tag == "Enemy")
+			if (collider.gameObject.tag == "Enemy")
 			{
-				Enemy enemy = col.gameObject.GetComponent<Enemy>();
+				Enemy enemy = collider.gameObject.GetComponent<Enemy>();
 				enemy.TakeDamage(Cannon.Damage);
 
 			}

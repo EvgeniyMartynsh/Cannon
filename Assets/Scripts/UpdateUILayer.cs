@@ -15,23 +15,28 @@ public class UpdateUILayer : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthCostText;
     [SerializeField] TextMeshProUGUI currentHealth;
 
-    GameManager gameManager;
 
-    private void Start()
+
+    private void OnEnable()
     {
-        gameManager = GameManager.instance; //TODO: почему-то вот этот момент не работает..
+        GameManager.instance.OnUIValueChanged += UpdateUI;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.instance.OnUIValueChanged -= UpdateUI;
     }
 
     public void UpdateUI()
     {
-        scoreText.text = "$ " + GameManager.instance.GameScore;
-        extraCoinsText.text = "$ extra " + GameManager.instance.ExtraCoins;
-        fireRangeText.text = "Range " + GameManager.instance.FireRange;
-        rotationSpeedText.text = "Rotation speed:  " + Cannon.RotationSpeed;
-        bulletSpeedText.text = "Bullet speed: " + Projectile.Speed;
-        healthPlayerText.text = Convert.ToString(GameManager.instance.UpgradeHealth);
-        healthCostText.text = "$ " + Convert.ToString(GameManager.instance.UpgradeHealthCost);
-        currentHealth.text = "H: " + GameManager.instance.CurrentGameHealth;
+            scoreText.text = "$ " + GameManager.instance.GameScore;
+            extraCoinsText.text = "$ extra " + GameManager.instance.ExtraCoins;
+            fireRangeText.text = "Range " + GameManager.instance.FireRange;
+            rotationSpeedText.text = "Rotation speed:  " + Cannon.RotationSpeed;
+            bulletSpeedText.text = "Bullet speed: " + Projectile.Speed;
+            healthPlayerText.text = Convert.ToString(GameManager.instance.UpgradeHealth);
+            healthCostText.text = "$ " + Convert.ToString(GameManager.instance.UpgradeHealthCost);
+            currentHealth.text = "H: " + GameManager.instance.CurrentGameHealth;
     }
 
 }

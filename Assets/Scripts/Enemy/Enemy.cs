@@ -23,14 +23,11 @@ public abstract class Enemy : MonoBehaviour
     protected Vector2 playerPosition = new Vector2(0, 0);
 
     public Rigidbody2D enemyRb;
-    UpdateUILayer _ui;
-    GameManager gameManager;
 
+    private UpdateUILayer _ui;
+    private GameManager gameManager;
+    private ActivateUpgradeButtons _activateUpgradeButtons;
 
-    //protected virtual void Awake()
-    //{
-    //    RenameEnemyGameObject();
-    //}
 
     protected virtual void Start()
     {
@@ -38,6 +35,7 @@ public abstract class Enemy : MonoBehaviour
         enemyRb = GetComponent<Rigidbody2D>();
         _ui = FindObjectOfType<UpdateUILayer>();
         gameManager = GameManager.instance;
+        _activateUpgradeButtons = GameObject.Find("Canvas").GetComponent<ActivateUpgradeButtons>();
     }
 
     private void Update()
@@ -60,35 +58,12 @@ public abstract class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Cannon"))
+        if (other.gameObject.CompareTag("Cannon") && !GameManager.instance.IsGameOver)
         {
             Destroy(gameObject);
-
-            if (gameManager.CurrentGameHealth - _damage > 0)
-                gameManager.ChangeHealth(_damage);
-            else
-            {
-                gameManager.ChangeHealth(gameManager.CurrentGameHealth);
-                gameManager.CurrentGameHealth = 0;
-
-            }
-                    
-
-            _ui.UpdateUI();
+            gameManager.ChangeHealthPoints(_damage);
         }
     }
-
-    //void RenameEnemyGameObject()
-    //{
-    //    if (transform.childCount == 0)
-    //        gameObject.name = gameManager.EnemyCount.ToString();
-
-    //    else
-    //    {
-    //        gameObject.name = gameManager.EnemyCount.ToString();
-    //        gameObject.transform.GetChild(0).name = gameManager.EnemyCount.ToString();
-    //    }
-    //}
 
     public void TakeDamage(int damage)
     {
@@ -102,11 +77,10 @@ public abstract class Enemy : MonoBehaviour
     {
         Destroy(this.gameObject);
 
-        gameManager.GameScore += _coins;
-        gameManager.ExtraCoins += _extraCoins;
-        Cannon.isDistanceToNearestTargenInFireRange = false;
+        gameManager.AddGameScorePoints(_coins);
+        gameManager.ChangeExtraCoins(_extraCoins);
 
-        _ui.UpdateUI();
+        Cannon.isDistanceToNearestTargenInFireRange = false;
     }
 
 

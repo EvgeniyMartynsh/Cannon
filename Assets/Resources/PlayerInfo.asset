@@ -15,6 +15,6 @@ MonoBehaviour:
   _gameData:
     initPlayerHealth: 150
     fireRange: 2
-    startScore: 10
+    startScore: 9
     extraCoins: 5
     keyBaseHealth: 1

@@ -24,16 +24,16 @@ public class Health : MonoBehaviour
             gameManager.KeyHealthCost += 1;
 
             gameManager.UpgradeHealth = gameManager.SetHealth(gameManager.KeyGameHealth);
-
             AddNewPointsToGameHealth(gameManager.KeyGameHealth);
 
+            GameManager.instance.DeductGameScorePoints();
 
             _life.SetValue(gameManager.healthNormolized);
 
 
             gameManager.UpgradeHealthCost = gameManager.SetHealthCost(gameManager.KeyHealthCost);
 
-            _ui.UpdateUI();
+            //_ui.UpdateUI();
         }
     }
 

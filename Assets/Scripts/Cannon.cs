@@ -13,9 +13,9 @@ public class Cannon : MonoBehaviour
     Transform nearestTarget = null;
     Vector2 directionTurretToTarget_2d;
 
-    public static float RotationSpeed { get; set; } = 0.1f;
-    public static int Damage { get; set; } = 10;
-    public float ShotDelay { get; set; } = 0.5f;
+    public static float RotationSpeed { get; private set; } = 0.1f;
+    public static int Damage { get; private set; } = 10;
+    public float ShotDelay { get; private set; } = 0.5f;
     public static bool isDistanceToNearestTargenInFireRange { get; set; } = false;
 
     bool isTargenOnField = false;
@@ -100,7 +100,6 @@ public class Cannon : MonoBehaviour
             }
         }
     }
-
 
     void Shoot()
     {

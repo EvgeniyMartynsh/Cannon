@@ -15,8 +15,6 @@ public class WavesSpawner : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("WaveSpawner start");
-
         var _levelsInfo = Resources.Load<LevelsData>("levelsinfo");
         _waves = _levelsInfo._wavesList;
         gameManager = GameManager.instance;
@@ -45,7 +43,6 @@ public class WavesSpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemy()
     {
-
         int count = 0;
 
         for (int i = 0; i < _waves.Count; i++)
@@ -72,8 +69,6 @@ public class WavesSpawner : MonoBehaviour
 
             }
         }
-
-
     }
 
     private GameObject ParsPrefab(int i, int j) //, int i

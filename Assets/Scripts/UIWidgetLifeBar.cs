@@ -6,27 +6,25 @@ using UnityEngine;
 public class UIWidgetLifeBar : MonoBehaviour
 {
     [SerializeField] private ProgressBarLife _progressBar;
-    GameManager gameManager;
 
 
     private void Start()
     {
-        gameManager = GameManager.instance;
         _progressBar.SetValue(GameManager.instance.healthNormolized);
 
-        gameManager.OnPlayerHealthValueChangedEvent += OnPlayerHealthValueChanged;
+        GameManager.instance.OnPlayerHealthChanged += HealthChanged;
     }
 
-    public void OnPlayerHealthValueChanged(float newValueNormalized)
+    public void HealthChanged(float newValueNormalized)
     {
         _progressBar.SetValue(newValueNormalized);
     }
 
     private void OnDisable()
     {
-        if (gameManager != null)
+        if (GameManager.instance != null)
         {
-            gameManager.OnPlayerHealthValueChangedEvent -= OnPlayerHealthValueChanged;
+            GameManager.instance.OnPlayerHealthChanged -= HealthChanged;
         }
         else
         {
