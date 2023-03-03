@@ -13,7 +13,7 @@ public class FPSCounter : MonoBehaviour
         {
             deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
             float fps = 1.0f / deltaTime;
-            fpsText.text = Mathf.RoundToInt(fps).ToString();
+            fpsText.text = "FPS: " + Mathf.RoundToInt(fps).ToString();
         }
     
 }

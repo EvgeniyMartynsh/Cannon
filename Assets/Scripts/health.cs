@@ -33,7 +33,6 @@ public class Health : MonoBehaviour
 
             gameManager.UpgradeHealthCost = gameManager.SetHealthCost(gameManager.KeyHealthCost);
 
-            //_ui.UpdateUI();
         }
     }
 

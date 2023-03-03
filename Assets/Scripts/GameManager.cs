@@ -108,11 +108,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        Debug.Log(Time.realtimeSinceStartup);
-    }
-
     public int SetHealth(int a)
     {
         var _health = Resources.Load<HealthData>("HealthDicInfo");

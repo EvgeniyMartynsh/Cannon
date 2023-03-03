@@ -9,7 +9,7 @@ public class PauseGameTime : MonoBehaviour
         Time.timeScale = 0;
     }
 
-    public void StartGame()
+    public void ResumeGame()
     {
         Time.timeScale = 1f;
     }
