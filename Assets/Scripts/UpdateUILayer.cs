@@ -15,6 +15,7 @@ public class UpdateUILayer : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthCostText;
     [SerializeField] TextMeshProUGUI currentHealth;
 
+    //TODO: данный скрипт висит на камере, а ему там вообще надо висеть?
 
 
     private void OnEnable()

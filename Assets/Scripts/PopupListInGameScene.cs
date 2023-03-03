@@ -7,6 +7,7 @@ public class PopupListInGameScene : MonoBehaviour
     [SerializeField] private List<GameObject> _popupList;
 
     [SerializeField] private GameObject _gameOverPopup;
+    [SerializeField] private GameObject _menuPopup;
 
 
 
@@ -22,6 +23,11 @@ public class PopupListInGameScene : MonoBehaviour
         _gameOverPopup.gameObject.SetActive(true);
     }
 
+    public void ActivateMenuPopup()
+    {
+        DisableAllPopups();
+        _menuPopup.gameObject.SetActive(true);
+    }
 
     void DisableAllPopups()
     {
@@ -34,6 +40,7 @@ public class PopupListInGameScene : MonoBehaviour
     void AddPopupToList()
     {
         _popupList.Add(_gameOverPopup);
+        _popupList.Add(_menuPopup);
     }
     
 
